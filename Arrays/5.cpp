@@ -7,7 +7,9 @@ void sumarVectores(int vec1[],int vec2[],int vecSuma[],int tamanio){
     
     for(int i = 0; i<tamanio;i++){
         vecSuma[i] = vec1[i] + vec2[i];
-    }    
+    }  
+
+    return; 
 }
 
 void multiplicacionEscalar(int vec1[],int vec2[],int &productoEscalar,int tamanio){
@@ -15,6 +17,8 @@ void multiplicacionEscalar(int vec1[],int vec2[],int &productoEscalar,int tamani
     for(int i = 0;i<tamanio;i++){
         productoEscalar = productoEscalar + (vec1[i] * vec2[i]);
     }
+
+    return;
 }
 
 
