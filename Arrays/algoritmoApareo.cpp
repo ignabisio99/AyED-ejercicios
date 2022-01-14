@@ -5,7 +5,8 @@ using namespace std;
 
 
 /*********** APAREO ****************/
-int cantElementos(int v[],int tamfisico)
+// Devuelve la cantidad de elementos logicos del vector
+int cantElementos(int v[],int tamfisico) 
 {
     int i = 0;
     while (i<tamfisico && v[i]!=VACIO)
