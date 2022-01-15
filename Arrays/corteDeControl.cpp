@@ -46,8 +46,8 @@ void cargaDatosPrueba(FacturaItem vec[], int tam)
 }
 /*TotalPorFactura implementa el corte de control,
 para poder utilizar este algoritmo el vector de facturas debe
-estar previamente ordenada por el número de factura.
-En tam debe recibir la cantidad de elementos existentes en el vector (tamaño lógico).*/
+estar previamente ordenada por el nÃºmero de factura.
+En tam debe recibir la cantidad de elementos existentes en el vector (tamaÃ±o lÃ³gico).*/
 void TotalPorFactura(FacturaItem vec[], int tam)
 {
     float suma;
