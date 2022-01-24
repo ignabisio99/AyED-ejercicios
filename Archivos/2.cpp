@@ -42,6 +42,7 @@ int main()
         cout << numero << " ";
         fread(&numero,sizeof(float),1,f);
     }
+    fclose(f);
     cout << endl;
     cout << "---------------------------------------------" << endl;
 
@@ -72,6 +73,7 @@ int main()
         cout << numero << " ";
         fread(&numero,sizeof(float),1,f);
     }
+    fclose(f);
 
     return 0;
 }
