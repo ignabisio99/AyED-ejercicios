@@ -62,7 +62,7 @@ void concatenarListas(Nodo *lista1, Nodo *lista2, Nodo *&listaUnificada)
 
     while(lista1)
     {
-        InsertarSiguiente(listaUnificada,lista1->info);
+        InsertarAlFinal(listaUnificada,lista1->info);
         lista1 = lista1->sgte;
     }
 
@@ -72,22 +72,25 @@ void concatenarListas(Nodo *lista1, Nodo *lista2, Nodo *&listaUnificada)
         lista2 = lista2->sgte;
     }
 
-
-
-
     return;
 }
 
 
-void MostrarLista(Nodo *lista)
+Nodo *ObtenerSiguiente(Nodo  *n)
 {
-    while (lista)
-    {
-        cout << lista->info << "   ";
-        lista = lista->sgte;
-    }
+    if (n)
+        return n->sgte;
+    else
+        return NULL;
+}
 
-    return;
+void MostrarLista(Nodo *milista)
+{
+    while (milista)
+    {
+        cout << milista->info << "   ";
+        milista = ObtenerSiguiente(milista);
+    }
 }
 
 
@@ -99,14 +102,22 @@ int main()
     Nodo *lista2 = NULL;
     Nodo *listaUnificada = NULL;
 
-    InsertarSiguiente(lista1,2);
-    InsertarSiguiente(lista1,16);
-    InsertarSiguiente(lista1,23);
+    InsertarAlFinal(lista1,2);
+    InsertarAlFinal(lista1,16);
+    InsertarAlFinal(lista1,23);
 
-    InsertarSiguiente(lista2,4);
-    InsertarSiguiente(lista2,43);
-    InsertarSiguiente(lista2,55);
-    InsertarSiguiente(lista2,86);
+    cout << "La primera lista es:" << endl;
+    MostrarLista(lista1);
+    cout << endl;
+
+    InsertarAlFinal(lista2,4);
+    InsertarAlFinal(lista2,43);
+    InsertarAlFinal(lista2,55);
+    InsertarAlFinal(lista2,86);
+
+    cout << "La segunda lista es:" << endl;
+    MostrarLista(lista2); 
+    cout << endl;
 
 
     concatenarListas(lista1,lista2,listaUnificada);
