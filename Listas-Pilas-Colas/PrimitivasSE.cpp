@@ -5,16 +5,16 @@
 using namespace std;
 
 
-struct NodoListaSE
+struct Nodo
 {
     int info;             // Datos de el nodo
-    NodoListaSE   *sgte;  // Puntero al siguiente nodo
+    Nodo   *sgte;  // Puntero al siguiente nodo
 
 };
 
 
 
-NodoListaSE *ObtenerSiguiente(NodoListaSE  *n)
+Nodo *obtenerSiguiente(Nodo  *n)
 {
     if (n)
         return n->sgte;
@@ -22,46 +22,46 @@ NodoListaSE *ObtenerSiguiente(NodoListaSE  *n)
         return NULL;
 }
 
-void MostrarLista(NodoListaSE *milista)
+void mostrarLista(Nodo *lista)
 {
-    while (milista)
+    while (lista)
     {
-        cout << milista->info << "   " << milista <<endl;
-        milista = ObtenerSiguiente(milista);
+        cout << lista->info << " ";
+        lista = obtenerSiguiente(lista);
     }
 }
 
-void InsertarSiguiente (NodoListaSE  *&n, int x)
+void insertarSiguiente (Nodo  *&lista, int x)
 {
-    NodoListaSE *nuevo= new NodoListaSE();
+    Nodo *nuevo= new Nodo();
     nuevo->info=x;
-    if (n)
+    if (lista)
     {
-        nuevo->sgte= n->sgte;
-        n->sgte = nuevo;
+        nuevo->sgte= lista->sgte;
+        lista->sgte = nuevo;
     }
     else
     {
-        nuevo->sgte= n;
-        n= nuevo;
+        nuevo->sgte= lista;
+        lista= nuevo;
     }
     return;
 }
 
-void BorrarSiguiente(NodoListaSE  *n)
+void borrarSiguiente(Nodo  *lista)
 {
-    NodoListaSE  *aborrar = n->sgte;
-    NodoListaSE  *sgteaborrar;
+    Nodo  *aborrar = lista->sgte;
+    Nodo  *sgteaborrar;
     if (aborrar)
         sgteaborrar= aborrar->sgte;
     else
         sgteaborrar = NULL;
-    n->sgte = sgteaborrar;
+    lista->sgte = sgteaborrar;
     delete aborrar;
     return;
 }
 
-NodoListaSE *ObtenerUltimo(NodoListaSE * p)
+Nodo *obtenerUltimo(Nodo *p)
 {
     if (p)
     {
@@ -74,9 +74,9 @@ NodoListaSE *ObtenerUltimo(NodoListaSE * p)
 
 }
 
-NodoListaSE* BuscarNodo(NodoListaSE * p, int infobuscada)
+Nodo* buscarNodo(Nodo *p, int infoBuscada)
 {
-    while (p && (p->info != infobuscada))
+    while (p && (p->info != infoBuscada))
     {
         p = p->sgte;
     }
@@ -84,9 +84,9 @@ NodoListaSE* BuscarNodo(NodoListaSE * p, int infobuscada)
 }
 
 
-NodoListaSE* BuscarNodoAnterior(NodoListaSE * raiz, NodoListaSE * anterior_a)
+Nodo* buscarNodoAnterior(Nodo *raiz, Nodo *anterior_a)
 {
-    NodoListaSE *p =NULL;
+    Nodo *p =NULL;
     if (raiz != anterior_a)
     {
         p = raiz;
@@ -101,9 +101,9 @@ NodoListaSE* BuscarNodoAnterior(NodoListaSE * raiz, NodoListaSE * anterior_a)
 }
 
 /*
-BorrarNodo: recibe por par·metro lista y el puntero a borrar
+BorrarNodo: recibe por par√°metro lista y el puntero a borrar
 */
-void borrarNodo(NodoListaSE *& raiz, NodoListaSE * aborrar)
+void borrarNodo(Nodo *&raiz, Nodo *aborrar)
 {
     if (raiz && aborrar)
     {
@@ -114,33 +114,33 @@ void borrarNodo(NodoListaSE *& raiz, NodoListaSE * aborrar)
         }
         else
         {
-            NodoListaSE *x = BuscarNodoAnterior(raiz,aborrar);
-            BorrarSiguiente(x);
+            Nodo *x = buscarNodoAnterior(raiz,aborrar);
+            borrarSiguiente(x);
         }
     }
     return;
 }
 
 
-void InsertarAlFinal(NodoListaSE *&lista, int x)
+void InsertarAlFinal(Nodo*&lista, int x)
 {
-    NodoListaSE *aux;
-    aux=ObtenerUltimo(lista);
+    Nodo *aux;
+    aux=obtenerUltimo(lista);
     if (aux)
     {
-        InsertarSiguiente(aux,x);
+        insertarSiguiente(aux,x);
     }
     else
     {
-        InsertarSiguiente(lista,x);
+        insertarSiguiente(lista,x);
     }
     return;
 }
 
-void borrarLista(NodoListaSE *&lista)
+void borrarLista(Nodo *&lista)
 {
-    NodoListaSE *anterior;
-    NodoListaSE *paux;
+    Nodo *anterior;
+    Nodo *paux;
     while (lista!=NULL)
     {
         anterior=NULL;
@@ -163,47 +163,7 @@ void borrarLista(NodoListaSE *&lista)
 }
 int main()
 {
+    cout << "Estas son las primitivas para Nodos SE" << endl;
 
-    NodoListaSE *milista = NULL;
-    NodoListaSE *aux;
-    NodoListaSE *x;
-    InsertarSiguiente(milista,5);
-    aux = ObtenerUltimo(milista);
-    InsertarSiguiente(aux,8);
-    aux = ObtenerUltimo(milista);
-    InsertarSiguiente(aux,3);
-    aux = ObtenerUltimo(milista);
-    InsertarSiguiente(aux,12);
-    MostrarLista(milista);
-    //Probamos obtener el ultimo
-    x = ObtenerUltimo(milista);
-    cout << "Usando ObtenerUltimo encontramos que el ultimo dato es: " << x->info << endl;
-    //Probamos buscar el elemento d
-    cout << "Buscamos un 3 con BuscarNodo."<< endl;
-    x = BuscarNodo(milista,3);
-    if (x)
-        cout << "El dato buscado es: " << x->info << endl;
-    else
-        cout << "El elemento no existe" << endl;
-    //Probamos buscar un elemento que no existe
-    cout << "Probamos buscar un elemento que no existe, se busca un 27." << endl;
-    x = BuscarNodo(milista,27);
-    if (x)
-        cout << "El dato buscado es: " << x->info << endl;
-    else
-        cout << "El elemento no existe" << endl;
-    cout  << "Agregamos un 9 al lado del 8" << endl;
-    x = BuscarNodo(milista,8);
-    if (x)
-        InsertarSiguiente(x,9);
-    MostrarLista(milista);
-    cout << "Probamos buscar nodo anterior al que contiene 3, para luego, desde este nodo encontrado, borrar el que contiene 3" << endl;
-    x = BuscarNodoAnterior(milista,BuscarNodo(milista,3));
-    BorrarSiguiente(x);
-    MostrarLista(milista);
-    //borra toda la lista para liberar memoria
-    cout << "Borramos toda la lista con borrarLista, este procedimiento se encarga de hacer delete de todos los nodos." << endl;
-    borrarLista(milista);
-    char c = getch();
     return 0;
 }
