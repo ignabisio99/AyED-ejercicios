@@ -108,7 +108,8 @@ int main()
     f = fopen("ParteDiario.DAT","rb");
     
     int cantPaises; // contiene la cantidad de paises en el arreglo
-    Paises *pais = new Paises[cantPaises];
+    // Paises *pais = new Paises[cantPaises];
+    Paises pais[cantPaises];
 
 
     listar(pais,cantPaises);
